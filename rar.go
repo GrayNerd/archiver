@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/nwaples/rardecode"
+	"github.com/graynerd/rardecode"
 )
 
 // Rar provides facilities for reading RAR archives.
