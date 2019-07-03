@@ -443,6 +443,8 @@ func ByExtension(filename string) (interface{}, error) {
 		return NewRar(), nil
 	case *Tar:
 		return NewTar(), nil
+	case *TarBrotli:
+		return NewTarBrotli(), nil
 	case *TarBz2:
 		return NewTarBz2(), nil
 	case *TarGz:
@@ -453,6 +455,8 @@ func ByExtension(filename string) (interface{}, error) {
 		return NewTarSz(), nil
 	case *TarXz:
 		return NewTarXz(), nil
+	case *TarZstd:
+		return NewTarZstd(), nil
 	case *Zip:
 		return NewZip(), nil
 	case *Gz:
@@ -460,11 +464,13 @@ func ByExtension(filename string) (interface{}, error) {
 	case *Bz2:
 		return NewBz2(), nil
 	case *Lz4:
-		return NewBz2(), nil
+		return NewLz4(), nil
 	case *Snappy:
 		return NewSnappy(), nil
 	case *Xz:
 		return NewXz(), nil
+	case *Zstd:
+		return NewZstd(), nil
 	}
 	return nil, fmt.Errorf("format unrecognized by filename: %s", filename)
 }
@@ -500,19 +506,23 @@ func ByHeader(input io.ReadSeeker) (Unarchiver, error) {
 // that can check extensions. Only to be used for
 // checking extensions - not any archival operations.
 var extCheckers = []ExtensionChecker{
+	&TarBrotli{},
 	&TarBz2{},
 	&TarGz{},
 	&TarLz4{},
 	&TarSz{},
 	&TarXz{},
+	&TarZstd{},
 	&Rar{},
 	&Tar{},
 	&Zip{},
+	&Brotli{},
 	&Gz{},
 	&Bz2{},
 	&Lz4{},
 	&Snappy{},
 	&Xz{},
+	&Zstd{},
 }
 
 var matchers = []Matcher{

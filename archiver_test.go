@@ -454,11 +454,13 @@ func symmetricTest(t *testing.T, formatName, dest string, testSymlinks, testMode
 var archiveFormats = []interface{}{
 	DefaultZip,
 	DefaultTar,
+	DefaultTarBrotli,
 	DefaultTarBz2,
 	DefaultTarGz,
 	DefaultTarLz4,
 	DefaultTarSz,
 	DefaultTarXz,
+	DefaultTarZstd,
 }
 
 type archiverUnarchiver interface {
